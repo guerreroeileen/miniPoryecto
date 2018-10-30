@@ -4,61 +4,64 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import co.edu.icesi.mio.model.Tmio1Bus;
-import co.edu.icesi.mio.model.Tmio1Conductore;
 
 @Repository
 @Scope("singleton")
-public class Tmio1_Buses_DAO implements ITmio1_Buses_DAO{
+public class Tmio1_Buses_DAO implements ITmio1_Buses_DAO {
 
-	//adicionales
+	@PersistenceContext
+	private EntityManager entityManager;
+
+	// adicionales
 	@Override
-	public List<Tmio1Bus> findByModel(EntityManager em, BigDecimal model) {
-		String jpql = "Select b from Tmio1Bus b where b.modelo="+ model;
-		return 	em.createQuery(jpql).getResultList();
+	public List<Tmio1Bus> findByModel(BigDecimal model) {
+		String jpql = "Select b from Tmio1Bus b where b.modelo=" + model;
+		return entityManager.createQuery(jpql).getResultList();
 	}
 
 	@Override
-	public List<Tmio1Bus>findByType(EntityManager em, String type) {
-		String jpql = "Select b from Tmio1Bus b where b.tipo= '"+  type + "'";
-		return 	em.createQuery(jpql).getResultList();
+	public List<Tmio1Bus> findByType(String type) {
+		String jpql = "Select b from Tmio1Bus b where b.tipo= '" + type + "'";
+		return entityManager.createQuery(jpql).getResultList();
 	}
 
 	@Override
-	public List<Tmio1Bus> findByCapacity(EntityManager em, BigDecimal capacity) {
-		String jpql = "Select b from Tmio1Bus b where b.capacidad="+ capacity;
-		return 	em.createQuery(jpql).getResultList();
+	public List<Tmio1Bus> findByCapacity(BigDecimal capacity) {
+		String jpql = "Select b from Tmio1Bus b where b.capacidad=" + capacity;
+		return entityManager.createQuery(jpql).getResultList();
 	}
 
-	//normales
+	// normales
 	@Override
-	public void save(EntityManager em, Tmio1Bus bus) {
-		em.persist(bus);
-	}
-
-	@Override
-	public void update(EntityManager em, Tmio1Bus bus) {
-		em.merge(bus);
+	public void save(Tmio1Bus bus) {
+		entityManager.persist(bus);
 	}
 
 	@Override
-	public void delete(EntityManager em, Tmio1Bus bus) {
-		em.remove(bus);
+	public void update(Tmio1Bus bus) {
+		entityManager.merge(bus);
 	}
 
 	@Override
-	public List<Tmio1Bus> findAll(EntityManager em) {
+	public void delete(Tmio1Bus bus) {
+		entityManager.remove(bus);
+	}
+
+	@Override
+	public List<Tmio1Bus> findAll() {
 		String jpql = "Select b from Tmio1Bus b";
-		return 	em.createQuery(jpql).getResultList();
+		return entityManager.createQuery(jpql).getResultList();
 	}
 
 	@Override
-	public Tmio1Bus findById(EntityManager em, Integer id) {
-		return em.find(Tmio1Bus.class, id);
+	public Tmio1Bus findById(Integer id) {
+		return entityManager.find(Tmio1Bus.class, id);
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
@@ -15,52 +16,59 @@ import co.edu.icesi.mio.model.Tmio1ServicioPK;
 
 @Repository
 @Scope("singleton")
-public class Tmio1_Servicios_DAO implements ITmio1_Servicios_DAO{
+public class Tmio1_Servicios_DAO implements ITmio1_Servicios_DAO {
 
-	//adicionales
-	@Override
-	public List<Tmio1Servicio> findByRangeOfDates(EntityManager em, Calendar fechaInicio, Calendar fechaFin) {
-		
-		String cadenaInicio="'"+fechaInicio.get(Calendar.YEAR)+"-"+fechaInicio.get(Calendar.MONTH)+"-"+fechaInicio.get(Calendar.DAY_OF_MONTH)+"'";
-		String cadenaFin= "'"+fechaFin.get(Calendar.YEAR)+"-"+fechaFin.get(Calendar.MONTH)+"-"+fechaFin.get(Calendar.DAY_OF_MONTH)+"'";
-		String jpql = "Select s from Tmio1Servicio s Where s.id.fechaInicio>=" + cadenaInicio + "and s.id.fechaFin<=" + cadenaFin;
-		
-		return 	em.createQuery(jpql).getResultList();
-	}
-	
-	@Override
-	public List<Tmio1Servicio> servicesSaturdaysAndSundaysOrJustSundays(EntityManager em) {
-		BigDecimal saturday= new BigDecimal(6);
-		BigDecimal sunday= new BigDecimal(7);
-		String jpql = "Select s from Tmio1Servicio s Where (s.tmio1Ruta.diaInicio ="+ saturday+ "AND s.tmio1Ruta.diaFin = " + sunday+ 
-				") or (s.tmio1Ruta.diaInicio ="+ sunday+ "AND s.tmio1Ruta.diaFin = " + sunday + ")";
-		return 	em.createQuery(jpql).getResultList();
-	}
+	@PersistenceContext
+	private EntityManager entityManager;
 
-	//normales
+	// adicionales
 	@Override
-	public void save(EntityManager em, Tmio1Servicio servicio) {
-		em.persist(servicio);
+	public List<Tmio1Servicio> findByRangeOfDates(Calendar fechaInicio, Calendar fechaFin) {
+
+		String cadenaInicio = "'" + fechaInicio.get(Calendar.YEAR) + "-" + fechaInicio.get(Calendar.MONTH) + "-"
+				+ fechaInicio.get(Calendar.DAY_OF_MONTH) + "'";
+		String cadenaFin = "'" + fechaFin.get(Calendar.YEAR) + "-" + fechaFin.get(Calendar.MONTH) + "-"
+				+ fechaFin.get(Calendar.DAY_OF_MONTH) + "'";
+		String jpql = "Select s from Tmio1Servicio s Where s.id.fechaInicio>=" + cadenaInicio + "and s.id.fechaFin<="
+				+ cadenaFin;
+
+		return entityManager.createQuery(jpql).getResultList();
 	}
 
 	@Override
-	public void update(EntityManager em, Tmio1Servicio servicio) {
-		em.merge(servicio);
+	public List<Tmio1Servicio> servicesSaturdaysAndSundaysOrJustSundays() {
+		BigDecimal saturday = new BigDecimal(6);
+		BigDecimal sunday = new BigDecimal(7);
+		String jpql = "Select s from Tmio1Servicio s Where (s.tmio1Ruta.diaInicio =" + saturday
+				+ "AND s.tmio1Ruta.diaFin = " + sunday + ") or (s.tmio1Ruta.diaInicio =" + sunday
+				+ "AND s.tmio1Ruta.diaFin = " + sunday + ")";
+		return entityManager.createQuery(jpql).getResultList();
+	}
+
+	// normales
+	@Override
+	public void save(Tmio1Servicio servicio) {
+		entityManager.persist(servicio);
 	}
 
 	@Override
-	public void delete(EntityManager em, Tmio1Servicio servicio) {
-		em.remove(servicio);
+	public void update(Tmio1Servicio servicio) {
+		entityManager.merge(servicio);
 	}
 
 	@Override
-	public List<Tmio1Servicio> findAll(EntityManager em) {
+	public void delete(Tmio1Servicio servicio) {
+		entityManager.remove(servicio);
+	}
+
+	@Override
+	public List<Tmio1Servicio> findAll() {
 		String jpql = "Select s from Tmio1Servicio s";
-		return 	em.createQuery(jpql).getResultList();
+		return entityManager.createQuery(jpql).getResultList();
 	}
 
 	@Override
-	public Tmio1Servicio findById(EntityManager em, Tmio1ServicioPK id) {
-		return em.find(Tmio1Servicio.class, id);
+	public Tmio1Servicio findById(Tmio1ServicioPK id) {
+		return entityManager.find(Tmio1Servicio.class, id);
 	}
 }
