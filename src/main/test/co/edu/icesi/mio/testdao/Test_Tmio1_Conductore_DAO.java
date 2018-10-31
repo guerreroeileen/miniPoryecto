@@ -11,6 +11,7 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Propagation;
@@ -28,6 +29,7 @@ import co.edu.icesi.mio.model.Tmio1ServiciosSitio;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/applicationContext.xml")
+@Rollback(false)
 public class Test_Tmio1_Conductore_DAO {
 
 	@Autowired
@@ -36,6 +38,7 @@ public class Test_Tmio1_Conductore_DAO {
 	@Test
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void saveTest() {
+		assertNotNull("Dao null", conductorDAO);
 		Tmio1Conductore tmioConductor = new Tmio1Conductore();
 		tmioConductor.setCedula("12345");
 		tmioConductor.setNombre("Jack");
@@ -74,7 +77,7 @@ public class Test_Tmio1_Conductore_DAO {
 	@Test
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void testFindByName() {
-		Tmio1Conductore conductor = conductorDAO.findByName("Jack Jack").get(0);
+		Tmio1Conductore conductor = conductorDAO.findByName("Jack").get(0);
 		assertNotNull("No se encontro el conductor por ese nombre", conductor);
 	}
 
