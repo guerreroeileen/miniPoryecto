@@ -19,58 +19,57 @@ public class TMIO1_RUTAS_LOGIC implements ITMIO1_RUTAS_LOGIC{
 	@Transactional(rollbackFor = LogicException.class)
 	public void save(Tmio1Ruta entity) throws LogicException {
 		if (entity!=null) {
-			if (entity.getId()!=null) {
-				
-			}else {
+			if (entity.getId()==null) {
 				throw new LogicException();
 			}
+			
+			if (entity.getNumero()==null || entity.getNumero().length()!=3) {
+				throw new LogicException();
+			}
+			if (entity.getDescripcion()==null || entity.getDescripcion().length()>30){
+				throw new LogicException();
+			}
+			if (entity.getDiaInicio()==null || entity.getDiaFin()==null) {
+				throw new LogicException();
+			}
+			if (entity.getHoraFin()==null || entity.getHoraInicio()==null) {
+				throw new LogicException();
+			}
+			dao_rutas.save(entity);
+			
+			
 			
 		}else {
 			throw new LogicException();
 		}
 		
-		if (entity.getNumero()==null || entity.getNumero().length()!=3) {
-			throw new LogicException();
-		}
-		if (entity.getDescripcion()==null || entity.getDescripcion().length()>30){
-			throw new LogicException();
-		}
-		if (entity.getDiaInicio()==null || entity.getDiaFin()==null) {
-			throw new LogicException();
-		}
-		if (entity.getHoraFin()==null || entity.getHoraInicio()==null) {
-			throw new LogicException();
-		}
-		dao_rutas.save(entity);
 	}
 
 	@Override
 	@Transactional(rollbackFor = LogicException.class)
 	public void update(Tmio1Ruta entity) throws LogicException {
 		if (entity!=null) {
-			if (entity.getId()!=null) {
-				
-			}else {
+			if (entity.getId()==null) {
 				throw new LogicException();
 			}
+			
+			if (entity.getNumero()==null || entity.getNumero().length()!=3) {
+				throw new LogicException();
+			}
+			if (entity.getDescripcion()==null || entity.getDescripcion().length()>30){
+				throw new LogicException();
+			}
+			if (entity.getDiaInicio()==null || entity.getDiaFin()==null) {
+				throw new LogicException();
+			}
+			if (entity.getHoraFin()==null || entity.getHoraInicio()==null) {
+				throw new LogicException();
+			}
+			dao_rutas.update(entity);
 			
 		}else {
 			throw new LogicException();
 		}
-		
-		if (entity.getNumero()==null || entity.getNumero().length()!=3) {
-			throw new LogicException();
-		}
-		if (entity.getDescripcion()==null || entity.getDescripcion().length()>30){
-			throw new LogicException();
-		}
-		if (entity.getDiaInicio()==null || entity.getDiaFin()==null) {
-			throw new LogicException();
-		}
-		if (entity.getHoraFin()==null || entity.getHoraInicio()==null) {
-			throw new LogicException();
-		}
-		dao_rutas.update(entity);
 		
 	}
 
