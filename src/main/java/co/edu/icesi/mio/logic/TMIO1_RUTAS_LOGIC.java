@@ -1,5 +1,7 @@
 package co.edu.icesi.mio.logic;
 
+import static org.hamcrest.CoreMatchers.endsWith;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -39,6 +41,7 @@ public class TMIO1_RUTAS_LOGIC implements ITMIO1_RUTAS_LOGIC{
 		if (entity.getHoraFin()==null || entity.getHoraInicio()==null) {
 			throw new LogicException();
 		}
+		dao_rutas.save(entity);
 	}
 
 	@Override
@@ -67,6 +70,7 @@ public class TMIO1_RUTAS_LOGIC implements ITMIO1_RUTAS_LOGIC{
 		if (entity.getHoraFin()==null || entity.getHoraInicio()==null) {
 			throw new LogicException();
 		}
+		dao_rutas.update(entity);
 		
 	}
 
@@ -74,7 +78,7 @@ public class TMIO1_RUTAS_LOGIC implements ITMIO1_RUTAS_LOGIC{
 	@Transactional(rollbackFor = LogicException.class)
 	public void delete(Tmio1Ruta entity) throws LogicException {
 		if (entity!=null) {
-			
+			dao_rutas.delete(entity);
 		}else {
 			throw new LogicException();
 		}
@@ -84,8 +88,10 @@ public class TMIO1_RUTAS_LOGIC implements ITMIO1_RUTAS_LOGIC{
 	@Override
 	@Transactional(rollbackFor = LogicException.class)
 	public List<Tmio1Ruta> findByRangeOfDays(BigDecimal diaInicio, BigDecimal diaFin) throws LogicException {
-		// TODO Auto-generated method stub
-		return null;
+		if (dao_rutas.findByRangeOfDays(diaInicio, diaFin)==null) {
+			throw new LogicException();
+		}
+		return dao_rutas.findByRangeOfDays(diaInicio, diaFin);
 	}
 	
 	
