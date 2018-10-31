@@ -130,7 +130,6 @@ public class TMIO1_CONDUCTORES_LOGIC implements ITMIO1_CONDUCTORES_LOGIC {
 		} else {
 			throw new LogicException();
 		}
-
 		return dao_conductores.findByCedula(cedula);
 	}
 
