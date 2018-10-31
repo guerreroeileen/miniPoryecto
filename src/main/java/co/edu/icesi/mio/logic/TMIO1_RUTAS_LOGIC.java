@@ -14,6 +14,9 @@ public class TMIO1_RUTAS_LOGIC implements ITMIO1_RUTAS_LOGIC{
 	@Override
 	public void save(Tmio1Ruta entity) throws LogicException {
 		if (entity!=null) {
+			if (entity.getId()!=null) {
+				Integer.parseInt(entity.getId());
+			}
 			
 		}else {
 			throw new LogicException();
