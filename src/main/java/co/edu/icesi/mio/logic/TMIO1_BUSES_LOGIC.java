@@ -9,108 +9,111 @@ import co.edu.icesi.mio.dao.ITmio1_Buses_DAO;
 import co.edu.icesi.mio.exceptions.LogicException;
 import co.edu.icesi.mio.model.Tmio1Bus;
 
-public class TMIO1_BUSES_LOGIC implements ITMIO1_BUSES_LOGIC{
-	
+public class TMIO1_BUSES_LOGIC implements ITMIO1_BUSES_LOGIC {
+
 	private ITmio1_Buses_DAO dao_buses;
 
 	@Override
 	@Transactional(rollbackFor = LogicException.class)
 	public void save(Tmio1Bus entity) throws LogicException {
-		if (entity!=null) {
-			if (entity.getId()==null) {
+		if (entity != null) {
+			if (entity.getPlaca() == null || entity.getPlaca().length() != 6) {
 				throw new LogicException();
 			}
-			
-			if (entity.getPlaca()==null || entity.getPlaca().length()>8) {
+			if (entity.getMarca() == null || entity.getMarca().length() >= 3) {
 				throw new LogicException();
 			}
-			if (entity.getMarca().length()>20) {
+
+			if (entity.getModelo() == null || entity.getModelo().toString().length() > 4) {
 				throw new LogicException();
 			}
-			if (entity.getModelo()==null) {
+
+			if (entity.getTipo() == null) {
 				throw new LogicException();
 			}
-			
-			
+			if (!entity.getTipo().equals("P") && !entity.getTipo().equals("A") && !entity.getTipo().equals("T")) {
+				throw new LogicException();
+			}
+			if (entity.getCapacidad() == null || entity.getCapacidad().doubleValue() <= 0) {
+				throw new LogicException();
+			}
 			dao_buses.save(entity);
-		}else {
+		} else {
 			throw new LogicException();
 		}
-		
-		
+
 	}
 
 	@Override
 	@Transactional(rollbackFor = LogicException.class)
 	public void update(Tmio1Bus entity) throws LogicException {
-		if (entity!=null) {
-			if (entity.getId()==null) {
+		if (entity != null) {
+			if (entity.getPlaca() == null || entity.getPlaca().length() != 6) {
 				throw new LogicException();
 			}
-			
-			if (entity.getPlaca()==null || entity.getPlaca().length()>8) {
+			if (entity.getMarca() == null || entity.getMarca().length() >= 3) {
 				throw new LogicException();
 			}
-			if (entity.getMarca().length()>20) {
+
+			if (entity.getModelo() == null || entity.getModelo().toString().length() > 4) {
 				throw new LogicException();
 			}
-			if (entity.getModelo()==null) {
+
+			if (entity.getTipo() == null) {
 				throw new LogicException();
 			}
-			
-			
-			dao_buses.save(entity);
-		}else {
+			if (!entity.getTipo().equals("P") && !entity.getTipo().equals("A") && !entity.getTipo().equals("T")) {
+				throw new LogicException();
+			}
+			if (entity.getCapacidad() == null || entity.getCapacidad().doubleValue() <= 0) {
+				throw new LogicException();
+			}
+			dao_buses.update(entity);
+		} else {
 			throw new LogicException();
 		}
-		
+
 	}
 
 	@Override
 	@Transactional(rollbackFor = LogicException.class)
 	public void delete(Tmio1Bus entity) throws LogicException {
-		if (entity!=null) {
+		if (entity != null) {
 			dao_buses.delete(entity);
-		}else {
+		} else {
 			throw new LogicException();
 		}
-		
+
 	}
 
 	@Override
 	@Transactional(rollbackFor = LogicException.class)
 	public List<Tmio1Bus> findByModel(BigDecimal model) throws LogicException {
-		List<Tmio1Bus> retorno = null;
-		if (dao_buses!=null) {
-			retorno = dao_buses.findByModel(model);
-		}else {
+		if (model == null || model.toString().length() > 4) {
 			throw new LogicException();
 		}
-		return retorno;
+		return dao_buses.findByModel(model);
 	}
 
 	@Override
 	@Transactional(rollbackFor = LogicException.class)
 	public List<Tmio1Bus> findByType(String type) throws LogicException {
-		List<Tmio1Bus> retorno = null;
-		if (dao_buses!=null) {
-			retorno = dao_buses.findByType(type);
-		}else {
+		if (type == null) {
 			throw new LogicException();
 		}
-		return retorno;
+		if (!type.equals("P") && !type.equals("A") && !type.equals("T")) {
+			throw new LogicException();
+		}
+		return dao_buses.findByType(type);
 	}
 
 	@Override
 	@Transactional(rollbackFor = LogicException.class)
 	public List<Tmio1Bus> findByCapacity(BigDecimal capacity) throws LogicException {
-		List<Tmio1Bus> retorno = null;
-		if (dao_buses!=null) {
-			retorno = dao_buses.findByCapacity(capacity);
-		}else {
+		if (capacity == null || capacity.doubleValue() <= 0) {
 			throw new LogicException();
 		}
-		return retorno;
+		return dao_buses.findByCapacity(capacity);
 	}
 
 }
