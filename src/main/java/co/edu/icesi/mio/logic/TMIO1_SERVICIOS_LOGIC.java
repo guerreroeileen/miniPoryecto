@@ -18,8 +18,16 @@ public class TMIO1_SERVICIOS_LOGIC implements ITMIO1_SERVICIOS_LOGIC{
 	public void save(Tmio1Servicio servicio) throws LogicException{
 		if (servicio!=null) {
 			
-			
-			
+			/**
+			 * la fecha inicio esté definida y sea menor o igual que la fecha final
+			 */
+			if (servicio.getId().getFechaInicio()!=null) {
+				if (servicio.getId().getFechaFin().compareTo(servicio.getId().getFechaFin())>1){
+					throw new LogicException();
+				}
+			}else {
+				throw new LogicException();
+			}
 			
 			
 			
