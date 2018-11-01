@@ -107,6 +107,24 @@ public class Test_TMIO1_BUSES_LOGIC {
 	}
 	
 	
+	@Test
+	public void testCapacidadNull() {
+		Tmio1Bus bus1 = new Tmio1Bus();
+		bus1.setMarca("Volvo");
+		bus1.setModelo(new BigDecimal(2015));
+		bus1.setPlaca("KGZ 311");
+		bus1.setTipo("W");
+		bus1.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		bus1.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		try {
+			buses_logica.save(bus1);
+			fail("se agrego");
+		} catch (LogicException e) {
+			assertEquals("error",e.getMessage());
+		}
+	}
+	
+	
 	
 
 }
