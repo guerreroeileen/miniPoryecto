@@ -19,7 +19,7 @@ public class TMIO1_SERVICIOS_LOGIC implements ITMIO1_SERVICIOS_LOGIC{
 		if (servicio!=null) {
 			
 			/**
-			 * la fecha inicio esté definida y sea menor o igual que la fecha final
+			 * la fecha inicio estï¿½ definida y sea menor o igual que la fecha final
 			 */
 			if (servicio.getId().getFechaInicio()!=null) {
 				if (servicio.getId().getFechaFin().compareTo(servicio.getId().getFechaFin())>1){
@@ -28,7 +28,9 @@ public class TMIO1_SERVICIOS_LOGIC implements ITMIO1_SERVICIOS_LOGIC{
 			}else {
 				throw new LogicException();
 			}
-			
+			if (servicio.getId().getCedulaConductor()==null) {
+				throw new LogicException();
+			}
 			
 			
 			dao_servicios.save(servicio);
@@ -41,14 +43,38 @@ public class TMIO1_SERVICIOS_LOGIC implements ITMIO1_SERVICIOS_LOGIC{
 	@Override
 	@Transactional(rollbackFor = LogicException.class)
 	public void update(Tmio1Servicio servicio)throws LogicException {
-		// TODO Auto-generated method stub
+	if (servicio!=null) {
+			
+			/**
+			 * la fecha inicio estï¿½ definida y sea menor o igual que la fecha final
+			 */
+			if (servicio.getId().getFechaInicio()!=null) {
+				if (servicio.getId().getFechaFin().compareTo(servicio.getId().getFechaFin())>1){
+					throw new LogicException();
+				}
+			}else {
+				throw new LogicException();
+			}
+			if (servicio.getId().getCedulaConductor()==null) {
+				throw new LogicException();
+			}
+			
+			
+			dao_servicios.save(servicio);
+		}else {
+			throw new LogicException();
+		}
 		
 	}
 
 	@Override
 	@Transactional(rollbackFor = LogicException.class)
 	public void delete(Tmio1Servicio servicio) throws LogicException{
-		// TODO Auto-generated method stub
+		if (servicio!=null) {
+			dao_servicios.delete(servicio);
+		}else {
+			throw new LogicException();
+		}
 		
 	}
 
@@ -62,8 +88,13 @@ public class TMIO1_SERVICIOS_LOGIC implements ITMIO1_SERVICIOS_LOGIC{
 	@Override
 	@Transactional(rollbackFor = LogicException.class)
 	public Tmio1Servicio findById(Tmio1ServicioPK id) throws LogicException{
-		// TODO Auto-generated method stub
-		return null;
+		Tmio1Servicio respuesta = null;
+		if (id!=null) {
+			respuesta =dao_servicios.findById(id);
+		}else {
+			throw new LogicException();
+		}
+		return respuesta;
 	}
 
 	
