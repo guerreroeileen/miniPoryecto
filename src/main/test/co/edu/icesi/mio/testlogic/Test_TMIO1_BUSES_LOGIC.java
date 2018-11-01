@@ -98,6 +98,12 @@ public class Test_TMIO1_BUSES_LOGIC {
 		bus1.setTipo("W");
 		bus1.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
 		bus1.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+		try {
+			buses_logica.save(bus1);
+			fail("se agrego");
+		} catch (LogicException e) {
+			assertEquals("error",e.getMessage());
+		}
 	}
 	
 	
