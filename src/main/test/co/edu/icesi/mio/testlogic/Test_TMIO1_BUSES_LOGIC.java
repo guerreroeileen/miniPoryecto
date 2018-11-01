@@ -88,6 +88,19 @@ public class Test_TMIO1_BUSES_LOGIC {
 	}
 	
 	
+	@Test
+	public void testTipoDiferente() {
+		Tmio1Bus bus1 = new Tmio1Bus();
+		bus1.setCapacidad(new BigDecimal(1000));
+		bus1.setMarca("Volvo");
+		bus1.setModelo(new BigDecimal(2015));
+		bus1.setPlaca("KGZ 311");
+		bus1.setTipo("W");
+		bus1.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
+		bus1.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
+	}
+	
+	
 	
 
 }
