@@ -86,6 +86,7 @@ public class TMIO1_SERVICIOS_LOGIC implements ITMIO1_SERVICIOS_LOGIC {
 	}
 
 	@Override
+	@Transactional(rollbackFor = LogicException.class)
 	public List<Tmio1Servicio> findByRangeOfDates(Calendar fechaInicio, Calendar fechaFin) throws LogicException {
 		if (fechaInicio != null && fechaFin != null) {
 			if (fechaInicio.compareTo(fechaFin) > 0) {

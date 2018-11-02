@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.icesi.mio.dao.ITmio1_Conductores_DAO;
@@ -57,7 +58,7 @@ public class TMIO1_CONDUCTORES_LOGIC implements ITMIO1_CONDUCTORES_LOGIC {
 	@Transactional(rollbackFor = LogicException.class)
 	public void update(Tmio1Conductore entity) throws LogicException {
 		if (entity != null) {
-			if (entity.getCedula() != null) {
+			if (entity.getCedula() != null && dao_conductores.findByCedula(entity.getCedula()) != null) {//Verifica que la entidad a actualizar si existe
 				try {
 					Integer.parseInt(entity.getCedula());
 				} catch (Exception e) {

@@ -83,6 +83,7 @@ public class Tmio1_Conductores_DAO implements ITmio1_Conductores_DAO {
 
 	@Override
 	public void delete(Tmio1Conductore conductor) {
+		conductor = entityManager.merge(conductor);
 		entityManager.remove(conductor);
 	}
 
