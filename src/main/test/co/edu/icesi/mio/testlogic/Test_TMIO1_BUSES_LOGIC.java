@@ -96,7 +96,7 @@ public class Test_TMIO1_BUSES_LOGIC {
 		bus1.setMarca("Volvo");
 		bus1.setModelo(new BigDecimal(2015));
 		bus1.setPlaca("KGZ 311");
-		bus1.setTipo("W");
+		bus1.setTipo("P");
 
 		try {
 			buses_logica.save(bus1);
