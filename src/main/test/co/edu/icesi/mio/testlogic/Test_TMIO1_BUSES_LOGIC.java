@@ -5,21 +5,16 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.icesi.mio.exceptions.LogicException;
 import co.edu.icesi.mio.logic.ITMIO1_BUSES_LOGIC;
 import co.edu.icesi.mio.model.Tmio1Bus;
-import co.edu.icesi.mio.model.Tmio1Servicio;
-import co.edu.icesi.mio.model.Tmio1ServiciosSitio;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/applicationContext.xml")
@@ -37,8 +32,6 @@ public class Test_TMIO1_BUSES_LOGIC {
 		bus.setMarca("Renault");
 		bus.setModelo(new BigDecimal(2015));
 		bus.setTipo("T");
-		bus.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
-		bus.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
 
 		buses_logica.save(bus);
 	}
@@ -52,8 +45,6 @@ public class Test_TMIO1_BUSES_LOGIC {
 		bus.setMarca("Renault");
 		bus.setModelo(new BigDecimal(2015));
 		bus.setTipo("T");
-		bus.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
-		bus.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
 
 		try {
 			buses_logica.save(bus);
@@ -71,8 +62,6 @@ public class Test_TMIO1_BUSES_LOGIC {
 		bus.setCapacidad(new BigDecimal(1000));
 		bus.setModelo(new BigDecimal(2015));
 		bus.setTipo("T");
-		bus.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
-		bus.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
 
 		try {
 			buses_logica.save(bus);
@@ -91,8 +80,6 @@ public class Test_TMIO1_BUSES_LOGIC {
 		bus1.setModelo(new BigDecimal(2015));
 		bus1.setPlaca("KGZ 311");
 		bus1.setTipo("W");
-		bus1.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
-		bus1.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
 
 		try {
 			buses_logica.save(bus1);
@@ -110,7 +97,6 @@ public class Test_TMIO1_BUSES_LOGIC {
 		bus1.setModelo(new BigDecimal(2015));
 		bus1.setPlaca("KGZ 311");
 		bus1.setTipo("W");
-		bus1.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
 
 		try {
 			buses_logica.save(bus1);

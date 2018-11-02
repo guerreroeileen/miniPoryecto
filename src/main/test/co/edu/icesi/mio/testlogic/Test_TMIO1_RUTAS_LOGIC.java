@@ -5,13 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import co.edu.icesi.mio.logic.ITMIO1_BUSES_LOGIC;
+import co.edu.icesi.mio.logic.ITMIO1_RUTAS_LOGIC;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/applicationContext.xml")
 public class Test_TMIO1_RUTAS_LOGIC {
 
 	@Autowired
-	private ITMIO1_BUSES_LOGIC buses_logic;
+	private ITMIO1_RUTAS_LOGIC rutas_logic;
 
 }
