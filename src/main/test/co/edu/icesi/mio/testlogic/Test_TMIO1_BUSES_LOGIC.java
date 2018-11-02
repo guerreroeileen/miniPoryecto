@@ -1,9 +1,5 @@
 package co.edu.icesi.mio.testlogic;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
@@ -23,14 +19,12 @@ import co.edu.icesi.mio.model.Tmio1ServiciosSitio;
 @ContextConfiguration("/applicationContext.xml")
 
 public class Test_TMIO1_BUSES_LOGIC {
-	
+
 	@Autowired
 	private ITMIO1_BUSES_LOGIC buses_logica;
-	
-	
-	
+
 	@Test
-	public void testAgregadoCorrecto () {
+	public void testAgregadoCorrecto() throws LogicException {
 		Tmio1Bus bus = new Tmio1Bus();
 		bus.setPlaca("SDF457");
 		bus.setCapacidad(new BigDecimal(1000));
@@ -39,14 +33,10 @@ public class Test_TMIO1_BUSES_LOGIC {
 		bus.setTipo("T");
 		bus.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
 		bus.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
-		try {
-			buses_logica.save(bus);
-			fail("se agrego");
-		} catch (LogicException e) {
-			assertEquals("error",e.getMessage());
-		}
+
+		buses_logica.save(bus);
 	}
-	
+
 	@Test
 	public void testPlacaMayor6Elementos() throws LogicException {
 		Tmio1Bus bus = new Tmio1Bus();
@@ -57,20 +47,12 @@ public class Test_TMIO1_BUSES_LOGIC {
 		bus.setTipo("T");
 		bus.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
 		bus.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
-		
-		try {
-			buses_logica.save(bus);
-			fail("se agrego");
-		} catch (LogicException e) {
-			assertEquals("error",e.getMessage());
-		}
-		
-				
+
+		buses_logica.save(bus);
 	}
-	
-	
+
 	@Test
-	public void testMarcaNull () {
+	public void testMarcaNull() throws LogicException {
 		Tmio1Bus bus = new Tmio1Bus();
 		bus.setPlaca("SDF578");
 		bus.setCapacidad(new BigDecimal(1000));
@@ -78,18 +60,12 @@ public class Test_TMIO1_BUSES_LOGIC {
 		bus.setTipo("T");
 		bus.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
 		bus.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
-		
-		try {
-			buses_logica.save(bus);
-			fail("se agrego");
-		} catch (LogicException e) {
-			assertEquals("error",e.getMessage());
-		}
+
+		buses_logica.save(bus);
 	}
-	
-	
+
 	@Test
-	public void testTipoDiferente() {
+	public void testTipoDiferente() throws LogicException {
 		Tmio1Bus bus1 = new Tmio1Bus();
 		bus1.setCapacidad(new BigDecimal(1000));
 		bus1.setMarca("Volvo");
@@ -98,33 +74,20 @@ public class Test_TMIO1_BUSES_LOGIC {
 		bus1.setTipo("W");
 		bus1.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
 		bus1.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
-		try {
-			buses_logica.save(bus1);
-			fail("se agrego");
-		} catch (LogicException e) {
-			assertEquals("error",e.getMessage());
-		}
+
+		buses_logica.save(bus1);
 	}
-	
-	
+
 	@Test
-	public void testCapacidadNull() {
+	public void testCapacidadNull() throws LogicException {
 		Tmio1Bus bus1 = new Tmio1Bus();
 		bus1.setMarca("Volvo");
 		bus1.setModelo(new BigDecimal(2015));
 		bus1.setPlaca("KGZ 311");
 		bus1.setTipo("W");
 		bus1.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
-		bus1.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
-		try {
-			buses_logica.save(bus1);
-			fail("se agrego");
-		} catch (LogicException e) {
-			assertEquals("error",e.getMessage());
-		}
+
+		buses_logica.save(bus1);
 	}
-	
-	
-	
 
 }

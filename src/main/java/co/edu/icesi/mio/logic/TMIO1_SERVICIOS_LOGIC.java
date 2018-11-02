@@ -3,6 +3,7 @@ package co.edu.icesi.mio.logic;
 import java.util.Calendar;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +14,7 @@ import co.edu.icesi.mio.model.Tmio1Servicio;
 @Service
 public class TMIO1_SERVICIOS_LOGIC implements ITMIO1_SERVICIOS_LOGIC {
 
+	@Autowired
 	private ITmio1_Servicios_DAO dao_servicios;
 
 	@Override

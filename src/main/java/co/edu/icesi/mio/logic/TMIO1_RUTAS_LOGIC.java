@@ -3,6 +3,7 @@ package co.edu.icesi.mio.logic;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +14,7 @@ import co.edu.icesi.mio.model.Tmio1Ruta;
 @Service
 public class TMIO1_RUTAS_LOGIC implements ITMIO1_RUTAS_LOGIC {
 
+	@Autowired
 	private ITmio1_Rutas_DAO dao_rutas;
 
 	@Override

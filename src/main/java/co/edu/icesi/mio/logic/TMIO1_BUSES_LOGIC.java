@@ -3,6 +3,7 @@ package co.edu.icesi.mio.logic;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +14,7 @@ import co.edu.icesi.mio.model.Tmio1Bus;
 @Service
 public class TMIO1_BUSES_LOGIC implements ITMIO1_BUSES_LOGIC {
 
+	@Autowired
 	private ITmio1_Buses_DAO dao_buses;
 
 	@Override
@@ -22,7 +24,7 @@ public class TMIO1_BUSES_LOGIC implements ITMIO1_BUSES_LOGIC {
 			if (entity.getPlaca() == null || entity.getPlaca().length() != 6) {
 				throw new LogicException();
 			}
-			if (entity.getMarca() == null || entity.getMarca().length() >= 3) {
+			if (entity.getMarca() == null || entity.getMarca().length() < 3) {
 				throw new LogicException();
 			}
 
