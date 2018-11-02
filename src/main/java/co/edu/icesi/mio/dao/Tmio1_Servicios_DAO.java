@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,18 +22,17 @@ public class Tmio1_Servicios_DAO implements ITmio1_Servicios_DAO {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	// adicionales
-	@Override
-	public List<Tmio1Servicio> findByRangeOfDates(Calendar fechaInicio, Calendar fechaFin) {
-
-		String cadenaInicio = "'" + fechaInicio.get(Calendar.YEAR) + "-" + fechaInicio.get(Calendar.MONTH) + "-"
-				+ fechaInicio.get(Calendar.DAY_OF_MONTH) + "'";
-		String cadenaFin = "'" + fechaFin.get(Calendar.YEAR) + "-" + fechaFin.get(Calendar.MONTH) + "-"
-				+ fechaFin.get(Calendar.DAY_OF_MONTH) + "'";
-		String jpql = "Select s from Tmio1Servicio s Where s.id.fechaInicio>=" + cadenaInicio + "and s.id.fechaFin<="
-				+ cadenaFin;
-
-		return entityManager.createQuery(jpql).getResultList();
+	public String fecha(Date date) {
+		@SuppressWarnings("deprecation")
+		StringTokenizer token = new StringTokenizer(new StringTokenizer(date.toLocaleString()).nextToken(), "/");
+		String dia = token.nextToken();
+		String mes = token.nextToken();
+		String ano = token.nextToken();
+		if (dia.length() == 1) {
+			return ano + "-" + mes + "-0" + dia;
+		} else {
+			return ano + "-" + mes + "-" + dia;
+		}
 	}
 
 	@Override
@@ -71,5 +71,14 @@ public class Tmio1_Servicios_DAO implements ITmio1_Servicios_DAO {
 	@Override
 	public Tmio1Servicio findById(Tmio1ServicioPK id) {
 		return entityManager.find(Tmio1Servicio.class, id);
+	}
+
+	@Override
+	public List<Tmio1Servicio> findByRangeOfDates(Date fechaInicio, Date fechaFin) {
+		String jpql = "Select a from Tmio1Servicio a Where a.id.fechaInicio >= '" + fecha(fechaInicio)
+				+ "' and a.id.fechaFin <= '" + fecha(fechaFin) + "'";
+		List<Tmio1Servicio> buses = entityManager.createQuery(jpql).getResultList();
+
+		return buses;
 	}
 }

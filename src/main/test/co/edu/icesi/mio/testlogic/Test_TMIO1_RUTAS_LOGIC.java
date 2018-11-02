@@ -40,7 +40,6 @@ public class Test_TMIO1_RUTAS_LOGIC {
 		ruta.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
 		ruta.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
 		ruta.setTmio1SitiosRutas1(new ArrayList<Tmio1SitiosRuta>());
-
 		rutas_logic.save(ruta);
 
 	}
@@ -88,7 +87,7 @@ public class Test_TMIO1_RUTAS_LOGIC {
 	}
 
 	@Test
-	public void diaInicioDiaFinNumericosEntreUnoySiente() {
+	public void diaInicioDiaFinNumericosEntreUnoySiete() {
 		Tmio1Ruta ruta1 = new Tmio1Ruta();
 		ruta1.setActiva("S");
 		ruta1.setDescripcion("ruta A a B");
@@ -209,7 +208,7 @@ public class Test_TMIO1_RUTAS_LOGIC {
 	}
 
 	@Test
-	public void activaSoNIorrecta() {
+	public void activaSoNIncorrecta() {
 		Tmio1Ruta ruta = new Tmio1Ruta();
 		ruta.setActiva("Z");
 		ruta.setDescripcion("ruta A a B");

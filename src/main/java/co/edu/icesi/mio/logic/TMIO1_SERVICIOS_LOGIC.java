@@ -1,6 +1,7 @@
 package co.edu.icesi.mio.logic;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,17 @@ public class TMIO1_SERVICIOS_LOGIC implements ITMIO1_SERVICIOS_LOGIC {
 				}
 			} else {
 				throw new LogicException();
+			}
+
+			List<Tmio1Servicio> list = dao_servicios.findByRangeOfDates(servicio.getId().getFechaInicio(),
+					servicio.getId().getFechaInicio());
+			for (Tmio1Servicio object : list) {
+				if (servicio.getTmio1Conductore().getCedula().equals(object.getTmio1Conductore().getCedula())) {
+					throw new LogicException();
+				}
+				if (servicio.getTmio1Bus().getId().equals(object.getTmio1Bus().getId())) {
+					throw new LogicException();
+				}
 			}
 
 			if (servicio.getId().getCedulaConductor() == null) {
@@ -87,7 +99,7 @@ public class TMIO1_SERVICIOS_LOGIC implements ITMIO1_SERVICIOS_LOGIC {
 
 	@Override
 	@Transactional(rollbackFor = LogicException.class)
-	public List<Tmio1Servicio> findByRangeOfDates(Calendar fechaInicio, Calendar fechaFin) throws LogicException {
+	public List<Tmio1Servicio> findByRangeOfDates(Date fechaInicio, Date fechaFin) throws LogicException {
 		if (fechaInicio != null && fechaFin != null) {
 			if (fechaInicio.compareTo(fechaFin) > 0) {
 				throw new LogicException();
@@ -99,3 +111,4 @@ public class TMIO1_SERVICIOS_LOGIC implements ITMIO1_SERVICIOS_LOGIC {
 	}
 
 }
+

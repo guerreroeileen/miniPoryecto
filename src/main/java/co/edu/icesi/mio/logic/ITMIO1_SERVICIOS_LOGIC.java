@@ -1,6 +1,6 @@
 package co.edu.icesi.mio.logic;
 
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import co.edu.icesi.mio.exceptions.LogicException;
@@ -14,6 +14,6 @@ public interface ITMIO1_SERVICIOS_LOGIC {
 
 	public void delete(Tmio1Servicio servicio) throws LogicException;
 
-	public List<Tmio1Servicio> findByRangeOfDates(Calendar fechaInicio, Calendar fechaFin) throws LogicException;
+	public List<Tmio1Servicio> findByRangeOfDates(Date fechaInicio, Date fechaFin) throws LogicException;
 
 }
