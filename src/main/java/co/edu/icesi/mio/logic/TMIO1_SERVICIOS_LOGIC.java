@@ -1,104 +1,98 @@
 package co.edu.icesi.mio.logic;
+
+import java.util.Calendar;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.icesi.mio.dao.ITmio1_Servicios_DAO;
 import co.edu.icesi.mio.exceptions.LogicException;
 import co.edu.icesi.mio.model.Tmio1Servicio;
-import co.edu.icesi.mio.model.Tmio1ServicioPK;
 
-public class TMIO1_SERVICIOS_LOGIC implements ITMIO1_SERVICIOS_LOGIC{
+@Service
+public class TMIO1_SERVICIOS_LOGIC implements ITMIO1_SERVICIOS_LOGIC {
 
 	private ITmio1_Servicios_DAO dao_servicios;
-	
-	
+
 	@Override
 	@Transactional(rollbackFor = LogicException.class)
-	public void save(Tmio1Servicio servicio) throws LogicException{
-		if (servicio!=null) {
-			
+	public void save(Tmio1Servicio servicio) throws LogicException {
+		if (servicio != null) {
+			if (servicio.getTmio1Conductore() == null) {
+				throw new LogicException();
+			}
 			/**
-			 * la fecha inicio est� definida y sea menor o igual que la fecha final
+			 * la fecha inicio esta definida y sea menor o igual que la fecha final
 			 */
-			if (servicio.getId().getFechaInicio()!=null) {
-				if (servicio.getId().getFechaFin().compareTo(servicio.getId().getFechaFin())>1){
+			if (servicio.getId().getFechaInicio() != null && servicio.getId().getFechaFin() != null) {
+				if (servicio.getId().getFechaInicio().compareTo(servicio.getId().getFechaFin()) > 0) {
 					throw new LogicException();
 				}
-			}else {
+			} else {
 				throw new LogicException();
 			}
-			if (servicio.getId().getCedulaConductor()==null) {
+
+			if (servicio.getId().getCedulaConductor() == null) {
 				throw new LogicException();
 			}
-			
-			
+
 			dao_servicios.save(servicio);
-		}else {
+		} else {
 			throw new LogicException();
 		}
-		
+
 	}
 
 	@Override
 	@Transactional(rollbackFor = LogicException.class)
-	public void update(Tmio1Servicio servicio)throws LogicException {
-	if (servicio!=null) {
-			
+	public void update(Tmio1Servicio servicio) throws LogicException {
+		if (servicio != null) {
+			if (servicio.getTmio1Conductore() == null) {
+				throw new LogicException();
+			}
 			/**
-			 * la fecha inicio est� definida y sea menor o igual que la fecha final
+			 * la fecha inicio esta definida y sea menor o igual que la fecha final
 			 */
-			if (servicio.getId().getFechaInicio()!=null) {
-				if (servicio.getId().getFechaFin().compareTo(servicio.getId().getFechaFin())>1){
+			if (servicio.getId().getFechaInicio() != null && servicio.getId().getFechaFin() != null) {
+				if (servicio.getId().getFechaInicio().compareTo(servicio.getId().getFechaFin()) > 0) {
 					throw new LogicException();
 				}
-			}else {
+			} else {
 				throw new LogicException();
 			}
-			if (servicio.getId().getCedulaConductor()==null) {
+
+			if (servicio.getId().getCedulaConductor() == null) {
 				throw new LogicException();
 			}
-			
-			
-			dao_servicios.save(servicio);
-		}else {
+
+			dao_servicios.update(servicio);
+		} else {
 			throw new LogicException();
 		}
-		
+
 	}
 
 	@Override
 	@Transactional(rollbackFor = LogicException.class)
-	public void delete(Tmio1Servicio servicio) throws LogicException{
-		if (servicio!=null) {
+	public void delete(Tmio1Servicio servicio) throws LogicException {
+		if (servicio != null) {
 			dao_servicios.delete(servicio);
-		}else {
+		} else {
 			throw new LogicException();
 		}
-		
 	}
 
 	@Override
-	@Transactional(rollbackFor = LogicException.class)
-	public List<Tmio1Servicio> findAll() throws LogicException{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	@Transactional(rollbackFor = LogicException.class)
-	public Tmio1Servicio findById(Tmio1ServicioPK id) throws LogicException{
-		Tmio1Servicio respuesta = null;
-		if (id!=null) {
-			respuesta =dao_servicios.findById(id);
-		}else {
+	public List<Tmio1Servicio> findByRangeOfDates(Calendar fechaInicio, Calendar fechaFin) throws LogicException {
+		if (fechaInicio != null && fechaFin != null) {
+			if (fechaInicio.compareTo(fechaFin) > 0) {
+				throw new LogicException();
+			}
+		} else {
 			throw new LogicException();
 		}
-		return respuesta;
+		return dao_servicios.findByRangeOfDates(fechaInicio, fechaFin);
 	}
-
-	
-	
-	
 
 }

@@ -10,9 +10,6 @@ import co.edu.icesi.mio.dao.ITmio1_Buses_DAO;
 import co.edu.icesi.mio.exceptions.LogicException;
 import co.edu.icesi.mio.model.Tmio1Bus;
 
-
-
-
 @Service
 public class TMIO1_BUSES_LOGIC implements ITMIO1_BUSES_LOGIC {
 
