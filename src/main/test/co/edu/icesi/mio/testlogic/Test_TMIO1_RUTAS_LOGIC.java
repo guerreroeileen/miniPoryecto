@@ -40,6 +40,7 @@ public class Test_TMIO1_RUTAS_LOGIC {
 		ruta.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
 		ruta.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
 		ruta.setTmio1SitiosRutas1(new ArrayList<Tmio1SitiosRuta>());
+
 		rutas_logic.save(ruta);
 
 	}
