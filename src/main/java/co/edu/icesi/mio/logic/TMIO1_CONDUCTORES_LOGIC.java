@@ -25,7 +25,7 @@ public class TMIO1_CONDUCTORES_LOGIC implements ITMIO1_CONDUCTORES_LOGIC {
 			if (entity.getCedula() != null) {
 				try {
 					Integer.parseInt(entity.getCedula());
-				} catch (Exception e) {
+				} catch (NumberFormatException e) {
 					throw new LogicException();
 				}
 			} else {
@@ -58,7 +58,11 @@ public class TMIO1_CONDUCTORES_LOGIC implements ITMIO1_CONDUCTORES_LOGIC {
 	@Transactional(rollbackFor = LogicException.class)
 	public void update(Tmio1Conductore entity) throws LogicException {
 		if (entity != null) {
-			if (entity.getCedula() != null && dao_conductores.findByCedula(entity.getCedula()) != null) {//Verifica que la entidad a actualizar si existe
+			if (entity.getCedula() != null && dao_conductores.findByCedula(entity.getCedula()) != null) {// Verifica que
+																											// la
+																											// entidad a
+																											// actualizar
+																											// si existe
 				try {
 					Integer.parseInt(entity.getCedula());
 				} catch (Exception e) {

@@ -34,6 +34,7 @@ public class Test_TMIO1_BUSES_LOGIC {
 		bus.setTipo("T");
 
 		buses_logica.save(bus);
+		buses_logica.delete(bus);
 	}
 
 	@Test

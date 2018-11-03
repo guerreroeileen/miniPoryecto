@@ -41,7 +41,7 @@ public class Test_TMIO1_RUTAS_LOGIC {
 		ruta.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
 		ruta.setTmio1SitiosRutas1(new ArrayList<Tmio1SitiosRuta>());
 		rutas_logic.save(ruta);
-
+		rutas_logic.delete(ruta);
 	}
 
 	@Test
@@ -66,7 +66,7 @@ public class Test_TMIO1_RUTAS_LOGIC {
 	}
 
 	@Test
-	public void diaInicioDiaFinNumericos() {
+	public void diaInicioDiaFinNumericos() throws LogicException {
 		Tmio1Ruta ruta1 = new Tmio1Ruta();
 		ruta1.setActiva("S");
 		ruta1.setDescripcion("ruta A a B");
@@ -78,12 +78,8 @@ public class Test_TMIO1_RUTAS_LOGIC {
 		ruta1.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
 		ruta1.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
 		ruta1.setTmio1SitiosRutas1(new ArrayList<Tmio1SitiosRuta>());
-		try {
-			rutas_logic.save(ruta1);
-			assertTrue(rutas_logic != null);
-		} catch (LogicException e) {
-			e.printStackTrace();
-		}
+		rutas_logic.save(ruta1);
+		rutas_logic.delete(ruta1);
 	}
 
 	@Test
@@ -102,6 +98,7 @@ public class Test_TMIO1_RUTAS_LOGIC {
 		try {
 			rutas_logic.save(ruta1);
 			assertTrue(rutas_logic.findByRangeOfDays(new BigDecimal("1"), new BigDecimal("7")) != null);
+			rutas_logic.delete(ruta1);
 		} catch (LogicException e) {
 			e.printStackTrace();
 		}
@@ -150,7 +147,7 @@ public class Test_TMIO1_RUTAS_LOGIC {
 	}
 
 	@Test
-	public void horaInicioYFinAgregadoCorrecto() {
+	public void horaInicioYFinAgregadoCorrecto() throws LogicException {
 		Tmio1Ruta ruta = new Tmio1Ruta();
 		ruta.setActiva("S");
 		ruta.setDescripcion("ruta A a B");
@@ -162,12 +159,10 @@ public class Test_TMIO1_RUTAS_LOGIC {
 		ruta.setTmio1Servicios(new ArrayList<Tmio1Servicio>());
 		ruta.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
 		ruta.setTmio1SitiosRutas1(new ArrayList<Tmio1SitiosRuta>());
-		try {
-			rutas_logic.save(ruta);
-			assertTrue(rutas_logic != null);
-		} catch (LogicException e) {
-			e.printStackTrace();
-		}
+
+		rutas_logic.save(ruta);
+		rutas_logic.delete(ruta);
+
 	}
 
 	@Test
@@ -205,7 +200,7 @@ public class Test_TMIO1_RUTAS_LOGIC {
 		ruta.setTmio1ServiciosSitios(new ArrayList<Tmio1ServiciosSitio>());
 		ruta.setTmio1SitiosRutas1(new ArrayList<Tmio1SitiosRuta>());
 		rutas_logic.save(ruta);
-
+		rutas_logic.delete(ruta);
 	}
 
 	@Test
