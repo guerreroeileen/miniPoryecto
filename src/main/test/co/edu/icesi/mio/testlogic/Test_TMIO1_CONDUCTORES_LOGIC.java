@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import co.edu.icesi.mio.exceptions.LogicException;
 import co.edu.icesi.mio.logic.ITMIO1_CONDUCTORES_LOGIC;
 import co.edu.icesi.mio.model.Tmio1Conductore;
+import co.edu.icesi.mio.model.Tmio1Servicio;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/applicationContext.xml")
@@ -39,6 +40,7 @@ public class Test_TMIO1_CONDUCTORES_LOGIC {
 		Calendar d = new GregorianCalendar(2018, 01, 20);
 		tmioConductor.setFechaContratacion(d.getTime());
 		conductores_logic.save(tmioConductor);
+		
 	}
 
 	@Test

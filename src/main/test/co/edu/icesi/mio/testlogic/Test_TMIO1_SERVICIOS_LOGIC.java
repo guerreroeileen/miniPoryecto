@@ -47,7 +47,7 @@ public class Test_TMIO1_SERVICIOS_LOGIC {
 		assertNotNull(servicios_logic);
 		assertNotNull(conductores_logic);
 		Tmio1Conductore tmioConductor = new Tmio1Conductore();
-		tmioConductor.setCedula("12345");
+		tmioConductor.setCedula("12345"+System.currentTimeMillis());
 		tmioConductor.setNombre("Jack");
 		tmioConductor.setApellidos("Bauer");
 		Calendar d1 = new GregorianCalendar(1998, 01, 20);
@@ -220,7 +220,7 @@ public class Test_TMIO1_SERVICIOS_LOGIC {
 		ruta.setHoraInicio(horaInicio);
 		BigDecimal horaFin = new BigDecimal(1400);
 		ruta.setHoraFin(horaFin);
-		rutas_logic.save(ruta);
+	
 
 		// ------------------------------------------------------------------
 		// Test save
